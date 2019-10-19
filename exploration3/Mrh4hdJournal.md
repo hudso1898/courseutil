@@ -45,8 +45,6 @@ changing the listening port to **9080**, and I updated `package.json` to a diffe
 and `ufw` (accessed through SSH). I went back and forth from running the server manually (for debugging purposes), but I added the server to `pm2` in order to run in the background like my
 original node server: `pm2 start index.js --name wergelNode`. At this point, I was able to access the API through https://www.hudso.dev:9080.
 
-![api-alive](../screenshots/api-alive.png)
-
 ### [1] Reimplementing LocalStorage in the API
 Once this was done, I defined two ways to access the city data:
 
@@ -355,8 +353,6 @@ app.use(function(req, res, next) {
 ```
 This allows cross-origin-requests to any other origin, thereby allowing the web browser to make an AJAX request for JSON. In fact, once this was in place, you can see CORS in action by
 inspecting the `network` part of the browser. Here, the browser is making a *preflight request* when getting/posting data.
-
-![cors](../screenshots/cors-preflight.png)
 
 Another problem arose after I was able to put and get data to/from the API, but the view was not updating. I added a `console.dir(this.cities)` in the `DataService`, and it was
 correctly printing out the populated (local) array of cities, but the view still had an empty array! After looking up this issue, I found the problem: before, I was using LocalStorage to access my
